@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="./calculate.js"></script>
+	</head>
+	<body>
+		<h2>Voltage Divider Resistor Chooser</h2>
+		<p>This is a special resistor voltage divider calculator. You tell it what is the maximum expected input voltage and the maximum desired output voltage, and a list of all the resistors you already own, and it automatically picks the two resistors you should use. This is useful because it means you don't have to buy a specific resistor for a project, and you don't have to calculate for every single resistor you own. Continue below to use</p>
+		<img src="./variable_descriptions.png"><br>
+		<b>Maximum Expected Input Voltage</b><br>
+		<input id="txt_inputVoltage" value="12.9" type="text"><br>
+		<b>Maximum Desired Output Voltage</b><br>
+		<input id="txt_outputVoltage" value="1.8" type="text"><br>
+		<b onclick="onclick_advanced()" style="cursor:pointer">Rin and Rload (click me to enable/disable)</b><br>
+		<div id="div_advanced" style="display:none">
+			<b>Input Internal Resistance</b><br>
+			<input id="txt_inputResistance" value="0" type="text"><br>
+			<b>Output Load Resistance</b><br>
+			<input id="txt_outputLoad" value="inf" type="text"><br>
+		</div>
+		<p>List of Resistors<br>
+		Put a list of all the resistors you would like to use, use numbers only, separated by spaces or a new line. Units don't matter as long as the units are all the same.</p>
+		<textarea id="txt_listOfResistors" style="width:100%;height:200px">10K
+15K
+22K
+47K
+75K
+100K
+220K
+330K
+470K
+1M
+		</textarea><br>
+		<input value="Calculate" onclick="calculate();" type="button"><br>
+		<b>Results</b></br>
+		<textarea id="txt_results" style="width:100%;height:300px" readonly="" disabled=""></textarea><br>
+		<p>I came up with this tool when I was trying to use a ADC of a microcontroller to read battery voltage. The microcontroller had an internal voltage reference option of 1.8V, and my battery pack could have been a fully charged 3S li-po pack, which meant 3 * 4.2 = 12.6V. I had enough resistors in my collection that I knew there must've been two values that got an output close to 1.8V so I wrote this tool to help me pick. Remember, you don't need to get an result exactly equal to the reference voltage of the ADC if your microcontroller can do some simple math to calculate the true reading.</p>
+		<p>This tool is open source, written in javascript, so you can view the source</p>
+		<p>The resistance units accepts syntax like:</p>
+		<ul>
+			<li>1</li>
+			<li>2.3</li>
+			<li>7.4K</li>
+			<li>3R</li>
+			<li>4R5</li>
+			<li>6K</li>
+			<li>7K8</li>
+			<li>9M</li>
+			<li>10M1</li>
+		</ul>
+		<p>The ohm (omega) symbol is not allowed, the word "ohm" is not allowed, and spaces are not allowed. Syntax like 4K456.7 is invalid.</p>
+		<p>Voltage is always specified in volts, in plain decimal format only.</p>
+	</body>
+</html>
